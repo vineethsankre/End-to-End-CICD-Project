@@ -117,7 +117,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'githubtoken', variable: 'githubtoken')]) {
 
                     sh '''
-                        git config user.email "lsvineethsankregmail.com"
+                        git config user.email "lsvineethsankre@gmail.com"
                         git config user.name "vineethsankre"
 
                         sed -i "s/vineethapp:.*/vineethapp:${BUILD_NUMBER}/g" deploymentfiles/deploy.yaml
