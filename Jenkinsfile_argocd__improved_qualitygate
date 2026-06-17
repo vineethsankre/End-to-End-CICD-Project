@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Checkout Git repo'
                 git branch: 'main',
-                    url: 'https://github.com/devopstraininghub/mindcircuit17d.git'   // Application code repo
+                    url: 'https://github.com/vineethsankre/End-to-End-CICD-Project.git'   // Application code repo
             }
         }
 
@@ -29,8 +29,8 @@ pipeline {
 
         //         sh '''
         //             mvn sonar:sonar \
-        //             -Dsonar.host.url=http://52.55.221.218:9000 \
-        //             -Dsonar.token=squ_0f39becdb864b01079c7ca1c09c68e6d1353446f
+        //             -Dsonar.host.url=http://23.20.51.12:9000/ \
+        //             -Dsonar.token=squ_7ad44ab7ca904a4059877b2591f791dc36bfc9ef
         //         '''
         //     }
         // }
@@ -69,7 +69,7 @@ pipeline {
                 echo 'Build Docker Image'
 
                 sh '''
-                    docker build -t devopshubg333/batch17d:${BUILD_NUMBER} -f Dockerfile .
+                    docker build -t vineethsankre/vineethapp:${BUILD_NUMBER} -f Dockerfile .
                 '''
             }
         }
@@ -79,7 +79,7 @@ pipeline {
                 echo 'Scanning Image'
 
                 sh '''
-                 trivy image --severity CRITICAL --exit-code 1 devopshubg333/batch17d:${BUILD_NUMBER}
+                 trivy image --severity CRITICAL --exit-code 1 vineethsankre/vineethapp:${BUILD_NUMBER}
                  '''
               
             }
@@ -91,11 +91,11 @@ pipeline {
                     withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
 
                         sh '''
-                            docker login -u devopshubg333 -p ${dockerhub}
+                            docker login -u vineethsankre -p ${dockerhub}
                         '''
 
                         sh '''
-                            docker push devopshubg333/batch17d:${BUILD_NUMBER}
+                            docker push vineethsankre/vineethapp:${BUILD_NUMBER}
                         '''
                     }
 
