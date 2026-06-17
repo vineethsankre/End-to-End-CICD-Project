@@ -107,8 +107,8 @@ pipeline {
         stage('Update GitOps Repo') {
 
             environment {
-                GIT_REPO_NAME = "mindcircuit17d"
-                GIT_USER_NAME = "devopstraininghub"
+                GIT_REPO_NAME = "End-to-End-CICD-Project"
+                GIT_USER_NAME = "vineethsankre"
             }
 
             steps {
@@ -117,10 +117,10 @@ pipeline {
                 withCredentials([string(credentialsId: 'githubtoken', variable: 'githubtoken')]) {
 
                     sh '''
-                        git config user.email "madhu@gmail.com"
-                        git config user.name "Madhu"
+                        git config user.email "lsvineethsankregmail.com"
+                        git config user.name "vineethsankre"
 
-                        sed -i "s/batch17d:.*/batch17d:${BUILD_NUMBER}/g" deploymentfiles/deploy.yaml
+                        sed -i "s/vineethapp:.*/vineethapp:${BUILD_NUMBER}/g" deploymentfiles/deploy.yaml
 
                         git add .
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}" || true
